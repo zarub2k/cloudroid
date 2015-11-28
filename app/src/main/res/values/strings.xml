@@ -9,4 +9,5 @@
     <string name="app_reader">CLOUD READER</string>
     <string name="app_custom">CUSTOM APP</string>
     <string name="title_activity_movies">Movies</string>
+    <string name="title_activity_scores">ScoresActivity</string>
 </resources>

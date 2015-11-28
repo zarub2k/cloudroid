@@ -22,7 +22,22 @@
         <activity
             android:name=".spotify.MoviesActivity"
             android:label="@string/title_activity_movies"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cloudskol.cloudroid.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".scores.ScoresActivity"
+            android:label="@string/title_activity_scores"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cloudskol.cloudroid.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

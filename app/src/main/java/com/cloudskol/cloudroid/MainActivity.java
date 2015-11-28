@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.cloudskol.cloudroid.scores.ScoresActivity;
 import com.cloudskol.cloudroid.spotify.MoviesActivity;
 
 /**
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onScores(View view) {
-        showToast(MainActivity.this, "Scores");
+        final Intent scoresIntent = new Intent(this, ScoresActivity.class);
+        startActivity(scoresIntent);
     }
 
     public void onLibrary(View view) {
