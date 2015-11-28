@@ -3,8 +3,6 @@ package com.cloudskol.cloudroid;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.cloudskol.cloudroid.scores.ScoresActivity;
-import com.cloudskol.cloudroid.spotify.MoviesActivity;
+import com.cloudskol.cloudroid.spotify.SpotifyActivity;
 
 /**
  * Main entry point for the application
@@ -62,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSpotify(View view) {
-//        showToast(MainActivity.this, "Spotify");
-        final Intent moviesIntent = new Intent(this, MoviesActivity.class);
-        startActivity(moviesIntent);
+        final Intent spotifyIntent = new Intent(this, SpotifyActivity.class);
+        startActivity(spotifyIntent);
     }
 
     public void onScores(View view) {
