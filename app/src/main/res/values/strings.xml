@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Cloudroid</string>
+    <string name="action_settings">Settings</string>
+    <string name="title">Cloudroid Apps!</string>
+    <string name="app_spotify">SPOTIFY STREAMER</string>
+    <string name="app_scores">SCORES APP</string>
+    <string name="app_library">LIBRARY APP</string>
+    <string name="app_bigger">BUILD IT BIGGER</string>
+    <string name="app_reader">CLOUD READER</string>
+    <string name="app_custom">CUSTOM APP</string>
+    <string name="title_activity_movies">Movies</string>
+</resources>
