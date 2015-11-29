@@ -28,7 +28,7 @@ public class SpotifyAsyncTask extends AsyncTask<String, Void, String> {
             return null;
         }
 
-        Log.d(LOG_TAG, moviesJsonString);
+        Log.v(LOG_TAG, moviesJsonString);
 
         return moviesJsonString;
     }
