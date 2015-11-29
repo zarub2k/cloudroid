@@ -5,12 +5,17 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.cloudskol.cloudroid.R;
+import com.cloudskol.cloudroid.common.CloudroidPropertyKeys;
+import com.cloudskol.cloudroid.common.CloudroidPropertyReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +26,8 @@ import java.util.Arrays;
  * Activity class for spotify application
  */
 public class SpotifyActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = SpotifyActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,21 @@ public class SpotifyActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_spotify, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        final int itemId = item.getItemId();
+        if (itemId == R.id.action_refresh) {
+            final String path = CloudroidPropertyReader.getInstance(getBaseContext())
+                    .getValue(CloudroidPropertyKeys.SPOTIFY_PATH);
+            final SpotifyAsyncTask spotifyAsyncTask = new SpotifyAsyncTask();
+            spotifyAsyncTask.execute(path);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void renderMovies() {

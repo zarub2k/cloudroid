@@ -25,7 +25,10 @@ public class SpotifyAsyncTask extends AsyncTask<String, Void, String> {
             moviesJsonString = spotifyUrlConnector.getJson(path);
         } catch (CloudroidException e) {
             Log.e(LOG_TAG, "Error while fetching JSON", e);
+            return null;
         }
+
+        Log.d(LOG_TAG, moviesJsonString);
 
         return moviesJsonString;
     }
