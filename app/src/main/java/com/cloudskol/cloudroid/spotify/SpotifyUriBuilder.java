@@ -28,4 +28,15 @@ public class SpotifyUriBuilder {
         Log.v(LOG_TAG, "Discover movies Uri: " + discoverMoviesUri.toString());
         return discoverMoviesUri;
     }
+
+    public Uri getMoviePoster185Uri(String image) {
+        Uri moviePosterUri = Uri.parse(propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_MOVIE_POSTER))
+                .buildUpon()
+                .appendPath(propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_MOVIE_POSTER_W185))
+                .appendPath(image)
+                .build();
+
+        Log.v(LOG_TAG, "Movie poster Uri: " + moviePosterUri.toString());
+        return moviePosterUri;
+    }
 }

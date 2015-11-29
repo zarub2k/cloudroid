@@ -12,6 +12,8 @@ public class Movie {
     private int average;
     private int count;
 
+    private String poster;
+
     public Movie() {}
 
     public Movie(int id, String title) {
@@ -62,6 +64,14 @@ public class Movie {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
     @Override

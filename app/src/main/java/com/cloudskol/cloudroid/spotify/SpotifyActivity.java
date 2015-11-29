@@ -1,5 +1,6 @@
 package com.cloudskol.cloudroid.spotify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,15 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.cloudskol.cloudroid.R;
-import com.cloudskol.cloudroid.common.CloudroidPropertyKeys;
 import com.cloudskol.cloudroid.common.CloudroidPropertyReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @author tham
@@ -27,7 +30,7 @@ public class SpotifyActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = SpotifyActivity.class.getSimpleName();
 
-    ArrayAdapter<String> arrayAdapter;
+    ArrayAdapter<Movie> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +63,7 @@ public class SpotifyActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int itemId = item.getItemId();
         if (itemId == R.id.action_refresh) {
-            final CloudroidPropertyReader cloudroidPropertyReader = CloudroidPropertyReader
-                    .getInstance(getBaseContext());
-            final SpotifyUriBuilder spotifyUriBuilder = new SpotifyUriBuilder(cloudroidPropertyReader);
-
-            final DiscoverMoviesAsyncTask discoverMoviesAsyncTask = new DiscoverMoviesAsyncTask(arrayAdapter);
-            discoverMoviesAsyncTask.execute(spotifyUriBuilder.discoverMoviesUri());
-
+            loadMoviesData();
             return true;
         }
 
@@ -74,16 +71,31 @@ public class SpotifyActivity extends AppCompatActivity {
     }
 
     private void renderMovies() {
-
-        String[] moviesArray = {
-                "Golden eye", "The Shooter", "Tomorrow never dies"
-        };
-
-        final ArrayList<String> movies = new ArrayList<String>(Arrays.asList(moviesArray));
-
         final GridView spotifyGridView = (GridView) findViewById(R.id.gridView_spotify);
-        arrayAdapter = new ArrayAdapter<String>(this,
-                R.layout.list_item_spotify, R.id.list_item_spotify_textview, movies);
+        arrayAdapter = new ArrayAdapter<Movie>(this,
+                R.layout.list_item_spotify, R.id.list_item_spotify_textview, new ArrayList<Movie>(2));
         spotifyGridView.setAdapter(arrayAdapter);
+
+        spotifyGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Intent movieDetailsIntent = new Intent(getBaseContext(),
+                        MovieDetailsActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, arrayAdapter.getItem(position).getTitle());
+                startActivity(movieDetailsIntent);
+//                Toast.makeText(getBaseContext(), "Grid item: " + arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        loadMoviesData();
+    }
+
+    private void loadMoviesData() {
+        final CloudroidPropertyReader cloudroidPropertyReader = CloudroidPropertyReader
+                .getInstance(getBaseContext());
+        final SpotifyUriBuilder spotifyUriBuilder = new SpotifyUriBuilder(cloudroidPropertyReader);
+
+        final DiscoverMoviesAsyncTask discoverMoviesAsyncTask = new DiscoverMoviesAsyncTask(arrayAdapter);
+        discoverMoviesAsyncTask.execute(spotifyUriBuilder.discoverMoviesUri());
     }
 }

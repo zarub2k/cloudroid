@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".spotify.SpotifyActivity"
             android:label="@string/title_activity_spotify"
@@ -31,7 +30,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cloudskol.cloudroid.MainActivity" />
         </activity>
-
         <activity
             android:name=".scores.ScoresActivity"
             android:label="@string/title_activity_scores"
@@ -41,7 +39,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cloudskol.cloudroid.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".spotify.MovieDetailsActivity"
+            android:label="@string/title_activity_movie_details"
+            android:parentActivityName=".spotify.SpotifyActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cloudskol.cloudroid.spotify.SpotifyActivity" />
+        </activity>
     </application>
 
 </manifest>

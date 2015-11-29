@@ -23,9 +23,9 @@ public class DiscoverMoviesAsyncTask extends AsyncTask<Uri, Void, List<Movie>> {
 
     private static final String LOG_TAG = DiscoverMoviesAsyncTask.class.getSimpleName();
 
-    private ArrayAdapter arrayAdapter_;
+    private ArrayAdapter<Movie> arrayAdapter_;
 
-    public DiscoverMoviesAsyncTask(ArrayAdapter arrayAdapter) {
+    public DiscoverMoviesAsyncTask(ArrayAdapter<Movie> arrayAdapter) {
         arrayAdapter_ = arrayAdapter;
     }
 
@@ -88,6 +88,7 @@ public class DiscoverMoviesAsyncTask extends AsyncTask<Uri, Void, List<Movie>> {
     private Movie getMovie(JSONObject movieJson) throws JSONException {
         Movie movie = new Movie(movieJson.getInt("id"), movieJson.getString("title"));
         movie.setOverview(movieJson.getString("overview"));
+        movie.setPoster(movieJson.getString("poster_path"));
         return movie;
     }
 }
