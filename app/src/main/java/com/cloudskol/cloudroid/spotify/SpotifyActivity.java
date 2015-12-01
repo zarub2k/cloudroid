@@ -30,7 +30,8 @@ public class SpotifyActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = SpotifyActivity.class.getSimpleName();
 
-    ArrayAdapter<Movie> arrayAdapter;
+//    ArrayAdapter<Movie> arrayAdapter;
+    private MoviesGridAdapter moviesGridAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,31 +72,56 @@ public class SpotifyActivity extends AppCompatActivity {
     }
 
     private void renderMovies() {
+//        initializeGridView();
+        initCustomGridView();
+        loadMoviesData();
+    }
+
+    private void initCustomGridView() {
+        final CloudroidPropertyReader cloudroidPropertyReader = CloudroidPropertyReader
+                .getInstance(getBaseContext());
+        final SpotifyUriBuilder spotifyUriBuilder = new SpotifyUriBuilder(cloudroidPropertyReader);
+
         final GridView spotifyGridView = (GridView) findViewById(R.id.gridView_spotify);
-        arrayAdapter = new ArrayAdapter<Movie>(this,
-                R.layout.list_item_spotify, R.id.list_item_spotify_textview, new ArrayList<Movie>(2));
-        spotifyGridView.setAdapter(arrayAdapter);
+        moviesGridAdapter = new MoviesGridAdapter(this, spotifyUriBuilder, new ArrayList<Movie>(2));
+        spotifyGridView.setAdapter(moviesGridAdapter);
 
         spotifyGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Intent movieDetailsIntent = new Intent(getBaseContext(),
                         MovieDetailsActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, arrayAdapter.getItem(position).getTitle());
+                        .putExtra(Intent.EXTRA_TEXT, moviesGridAdapter.getItem(position).getTitle());
                 startActivity(movieDetailsIntent);
 //                Toast.makeText(getBaseContext(), "Grid item: " + arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
             }
         });
-
-        loadMoviesData();
     }
+
+//    private void initializeGridView() {
+//        final GridView spotifyGridView = (GridView) findViewById(R.id.gridView_spotify);
+//        arrayAdapter = new ArrayAdapter<Movie>(this,
+//                R.layout.list_item_spotify, R.id.list_item_spotify_textview, new ArrayList<Movie>(2));
+//        spotifyGridView.setAdapter(arrayAdapter);
+//
+//        spotifyGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                final Intent movieDetailsIntent = new Intent(getBaseContext(),
+//                        MovieDetailsActivity.class)
+//                        .putExtra(Intent.EXTRA_TEXT, arrayAdapter.getItem(position).getTitle());
+//                startActivity(movieDetailsIntent);
+////                Toast.makeText(getBaseContext(), "Grid item: " + arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     private void loadMoviesData() {
         final CloudroidPropertyReader cloudroidPropertyReader = CloudroidPropertyReader
                 .getInstance(getBaseContext());
         final SpotifyUriBuilder spotifyUriBuilder = new SpotifyUriBuilder(cloudroidPropertyReader);
 
-        final DiscoverMoviesAsyncTask discoverMoviesAsyncTask = new DiscoverMoviesAsyncTask(arrayAdapter);
+        final DiscoverMoviesAsyncTask discoverMoviesAsyncTask = new DiscoverMoviesAsyncTask(moviesGridAdapter);
         discoverMoviesAsyncTask.execute(spotifyUriBuilder.discoverMoviesUri());
     }
 }

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.cloudskol.cloudroid.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,16 +47,24 @@ public class MoviesGridAdapter extends BaseAdapter {
         ImageView imageView;
         if (convertView == null) {
             imageView =  new ImageView(context_);
-//            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+//            imageView.setLayoutParams(new GridView.LayoutParams(300, 400));
 //            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //            imageView.setPadding(8, 8, 8, 8);
         } else {
             imageView = (ImageView) convertView;
         }
+//
+//        final Movie movie = movies_.get(position);
+//        imageView.setImageURI(spotifyUriBuilder_.getMoviePoster185Uri(movie.getPoster()));
+//
+//        return imageView;
 
         final Movie movie = movies_.get(position);
-        imageView.setImageURI(spotifyUriBuilder_.getMoviePoster185Uri(movie.getPoster()));
-
+        Picasso.with(context_).load(spotifyUriBuilder_.getMoviePoster185Uri(movie.getPoster())).into(imageView);
         return imageView;
+    }
+
+    public void addAll(List<Movie> movies) {
+        movies_.addAll(movies);
     }
 }

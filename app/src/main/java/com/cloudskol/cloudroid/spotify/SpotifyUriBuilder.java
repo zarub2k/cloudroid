@@ -29,14 +29,23 @@ public class SpotifyUriBuilder {
         return discoverMoviesUri;
     }
 
-    public Uri getMoviePoster185Uri(String image) {
+    public Uri getMoviePoster185Uri(String imageUri) {
+
         Uri moviePosterUri = Uri.parse(propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_MOVIE_POSTER))
                 .buildUpon()
                 .appendPath(propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_MOVIE_POSTER_W185))
-                .appendPath(image)
+                .appendPath(removeSlash(imageUri))
                 .build();
 
         Log.v(LOG_TAG, "Movie poster Uri: " + moviePosterUri.toString());
         return moviePosterUri;
+    }
+
+    private String removeSlash(String value) {
+        if (value.startsWith("/")) {
+            value = value.substring(value.indexOf("/") + 1);
+        }
+
+        return value;
     }
 }

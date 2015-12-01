@@ -12,4 +12,15 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
+
+    @Test
+    public void testRemoveSlash() {
+        String value = "/g23cs30dCMiG4ldaoVNP1ucjs6.jpg";
+        if (value.startsWith("/")) {
+            value.substring(value.indexOf("/") + 1);
+        }
+
+        System.out.println("Final value: " + value);
+    }
 }

@@ -23,10 +23,10 @@ public class DiscoverMoviesAsyncTask extends AsyncTask<Uri, Void, List<Movie>> {
 
     private static final String LOG_TAG = DiscoverMoviesAsyncTask.class.getSimpleName();
 
-    private ArrayAdapter<Movie> arrayAdapter_;
+    private MoviesGridAdapter moviesGridAdapter_;
 
-    public DiscoverMoviesAsyncTask(ArrayAdapter<Movie> arrayAdapter) {
-        arrayAdapter_ = arrayAdapter;
+    public DiscoverMoviesAsyncTask(MoviesGridAdapter moviesGridAdapter) {
+        moviesGridAdapter_ = moviesGridAdapter;
     }
 
     @Override
@@ -56,8 +56,10 @@ public class DiscoverMoviesAsyncTask extends AsyncTask<Uri, Void, List<Movie>> {
             return;
         }
 
-        arrayAdapter_.clear();
-        arrayAdapter_.addAll(movies);
+        moviesGridAdapter_.addAll(movies);
+        moviesGridAdapter_.notifyDataSetChanged();
+//        arrayAdapter_.clear();
+//        arrayAdapter_.addAll(movies);
     }
 
     private List<Movie> parseMoviesJson(String moviesJsonString) {
