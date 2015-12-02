@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cloudskol.cloudroid.R;
+import com.cloudskol.cloudroid.common.CloudroidPropertyReader;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -30,9 +31,19 @@ public class MovieDetailsActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final String movieTitle = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        TextView textView = (TextView) findViewById(R.id.movie_details_textview);
-        textView.setText(movieTitle);
+        final int movieId = getIntent().getIntExtra(Intent.EXTRA_TEXT, -1);
+        renderMovieDetails(movieId);
+
+//        TextView textView = (TextView) findViewById(R.id.movie_details_textview);
+//        textView.setText(movieTitle);
     }
 
+    private void renderMovieDetails(int movieId) {
+        final CloudroidPropertyReader cloudroidPropertyReader = CloudroidPropertyReader
+                .getInstance(getBaseContext());
+        final SpotifyUriBuilder spotifyUriBuilder = new SpotifyUriBuilder(cloudroidPropertyReader);
+
+        MovieDetailsAsyncTask movieDetailsTask = new MovieDetailsAsyncTask(this);
+        movieDetailsTask.execute(spotifyUriBuilder.getMovieDetails(movieId));
+    }
 }

@@ -1,5 +1,6 @@
 package com.cloudskol.cloudroid.spotify;
 
+import android.net.Uri;
 import android.util.Log;
 
 import com.cloudskol.cloudroid.common.CloudroidException;
@@ -18,6 +19,10 @@ import java.net.URLConnection;
  * @author tham
  */
 public class SpotifyUrlConnector {
+    public String getJson(Uri uri) throws CloudroidException {
+        return getJson(uri.toString());
+    }
+
     public String getJson(String path) throws CloudroidException {
         HttpURLConnection urlConnection = null;
         BufferedReader bufferedReader = null;

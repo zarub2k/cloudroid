@@ -41,6 +41,17 @@ public class SpotifyUriBuilder {
         return moviePosterUri;
     }
 
+    public Uri getMovieDetails(int movieId) {
+        Uri movieDetailsUri = Uri.parse(propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_MOVIE_DETAILS))
+                .buildUpon()
+                .appendPath(String.valueOf(movieId))
+                .appendQueryParameter("api_key", propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_API_KEY))
+                .build();
+
+        Log.v(LOG_TAG, "Movie details Uri: " + movieDetailsUri.toString());
+        return movieDetailsUri;
+    }
+
     private String removeSlash(String value) {
         if (value.startsWith("/")) {
             value = value.substring(value.indexOf("/") + 1);
