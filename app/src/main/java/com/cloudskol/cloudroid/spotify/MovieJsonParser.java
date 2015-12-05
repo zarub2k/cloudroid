@@ -62,9 +62,9 @@ public class MovieJsonParser {
     }
 
     private Movie getMovie(JSONObject movieJson) throws JSONException {
-        Movie movie = new Movie(movieJson.getInt("id"), movieJson.getString("title"));
-        movie.setOverview(movieJson.getString("overview"));
-        movie.setPoster(movieJson.getString("poster_path"));
+        Movie movie = new Movie(movieJson.getInt(MovieJson.ID.getValue()), movieJson.getString(MovieJson.TITLE.getValue()));
+        movie.setOverview(movieJson.getString(MovieJson.OVERVIEW.getValue()));
+        movie.setPoster(movieJson.getString(MovieJson.POSTER.getValue()));
         return movie;
     }
 }

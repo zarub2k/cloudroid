@@ -91,7 +91,7 @@ public class SpotifyActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Intent movieDetailsIntent = new Intent(getBaseContext(),
                         MovieDetailsActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, moviesGridAdapter.getItem(position).getTitle());
+                        .putExtra(Intent.EXTRA_TEXT, moviesGridAdapter.getItem(position).getId());
                 startActivity(movieDetailsIntent);
 //                Toast.makeText(getBaseContext(), "Grid item: " + arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
             }

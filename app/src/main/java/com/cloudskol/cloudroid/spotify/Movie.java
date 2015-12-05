@@ -7,12 +7,14 @@ package com.cloudskol.cloudroid.spotify;
  */
 public class Movie {
     private int id;
-    private String title;
+    private String originalTitle;
     private String overview;
-    private int average;
-    private int count;
-
     private String poster;
+    private double rating;
+    private String releaseDate;
+
+
+    private String title;
 
     public Movie() {}
 
@@ -24,6 +26,7 @@ public class Movie {
     public Movie(int id, String title, String overview) {
         this(id, title);
         this.overview = overview;
+
     }
 
     public int getId() {
@@ -34,12 +37,12 @@ public class Movie {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
     }
 
     public String getOverview() {
@@ -50,22 +53,6 @@ public class Movie {
         this.overview = overview;
     }
 
-    public int getAverage() {
-        return average;
-    }
-
-    public void setAverage(int average) {
-        this.average = average;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     public String getPoster() {
         return poster;
     }
@@ -74,8 +61,27 @@ public class Movie {
         this.poster = poster;
     }
 
-    @Override
-    public String toString() {
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

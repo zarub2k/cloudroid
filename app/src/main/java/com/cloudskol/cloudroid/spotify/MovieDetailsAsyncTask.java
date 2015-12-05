@@ -41,4 +41,13 @@ public class MovieDetailsAsyncTask extends AsyncTask<Uri, Void, Movie> {
         Log.v(LOG_TAG, movieDetailsJsonString);
         return MovieJsonParser.getInstance().getMovie(movieDetailsJsonString);
     }
+
+    @Override
+    protected void onPostExecute(Movie movie) {
+        super.onPostExecute(movie);
+
+        if (context_ instanceof MovieDetailsActivity) {
+            ((MovieDetailsActivity)context_).onMovieDataReceived(movie);
+        }
+    }
 }

@@ -46,4 +46,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
         MovieDetailsAsyncTask movieDetailsTask = new MovieDetailsAsyncTask(this);
         movieDetailsTask.execute(spotifyUriBuilder.getMovieDetails(movieId));
     }
+
+    public void onMovieDataReceived(Movie movie) {
+        TextView textView = (TextView) findViewById(R.id.movie_details_textview);
+        textView.setText(movie.getOverview());
+    }
 }
