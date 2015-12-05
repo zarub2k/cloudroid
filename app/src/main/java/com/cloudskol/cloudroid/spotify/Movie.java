@@ -12,7 +12,7 @@ public class Movie {
     private String originalTitle;
     private String overview;
     private String poster;
-    private double rating;
+    private float rating;
     private String releaseDate;
 
 
@@ -71,11 +71,11 @@ public class Movie {
         this.poster = poster;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.cloudskol.cloudroid.R;
@@ -62,5 +63,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.movie_details_overview);
         textView.setText(movie.getOverview());
+
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.movie_details_rating);
+        ratingBar.setRating(movie.getRating());
     }
 }
