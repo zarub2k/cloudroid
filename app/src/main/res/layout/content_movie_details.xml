@@ -20,7 +20,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/movie_details_title" />
+        android:id="@+id/movie_details_title"
+        android:textSize="@dimen/title_font_size_25"
+        android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
