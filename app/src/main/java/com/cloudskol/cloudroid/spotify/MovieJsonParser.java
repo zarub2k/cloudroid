@@ -2,8 +2,12 @@ package com.cloudskol.cloudroid.spotify;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author tham
@@ -20,6 +24,21 @@ public class MovieJsonParser {
         return INSTANCE;
     }
 
+    public List<Movie> getMovies(String moviesJsonString) {
+        try {
+            final JSONObject moviesJson = new JSONObject(moviesJsonString);
+            final JSONArray results = moviesJson.getJSONArray("results");
+
+            Log.v(LOG_TAG,  "Size of the result array is : " + results.length());
+
+            return getMovies(results);
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error while parsing movies JSON", e);
+        }
+
+        return null;
+    }
+
     public Movie getMovie(String movieJsonString) {
         Movie movie = null;
         try {
@@ -30,6 +49,16 @@ public class MovieJsonParser {
         }
 
         return movie;
+    }
+
+    private List<Movie> getMovies(JSONArray moviesJsonArray) throws JSONException {
+        List<Movie> movies = new ArrayList<Movie>(moviesJsonArray.length());
+
+        for (int i = 0; i < moviesJsonArray.length(); i++) {
+            movies.add(getMovie(moviesJsonArray.getJSONObject(i)));
+        }
+
+        return movies;
     }
 
     private Movie getMovie(JSONObject movieJson) throws JSONException {

@@ -3,15 +3,9 @@ package com.cloudskol.cloudroid.spotify;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.cloudskol.cloudroid.common.CloudroidException;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +41,7 @@ public class DiscoverMoviesAsyncTask extends AsyncTask<Uri, Void, List<Movie>> {
 
         Log.v(LOG_TAG, moviesJsonString);
 
-        return parseMoviesJson(moviesJsonString);
+        return MovieJsonParser.getInstance().getMovies(moviesJsonString);
     }
 
     @Override
@@ -58,39 +52,5 @@ public class DiscoverMoviesAsyncTask extends AsyncTask<Uri, Void, List<Movie>> {
 
         moviesGridAdapter_.addAll(movies);
         moviesGridAdapter_.notifyDataSetChanged();
-//        arrayAdapter_.clear();
-//        arrayAdapter_.addAll(movies);
-    }
-
-    private List<Movie> parseMoviesJson(String moviesJsonString) {
-        try {
-            final JSONObject moviesJson = new JSONObject(moviesJsonString);
-            final JSONArray results = moviesJson.getJSONArray("results");
-
-            Log.v(LOG_TAG,  "Size of the result array is : " + results.length());
-
-            return getMovies(results);
-        } catch (JSONException e) {
-            Log.e(LOG_TAG, "Error while parsing movies JSON", e);
-        }
-
-        return null;
-    }
-
-    private List<Movie> getMovies(JSONArray moviesJsonArray) throws JSONException {
-        List<Movie> movies = new ArrayList<Movie>(moviesJsonArray.length());
-
-        for (int i = 0; i < moviesJsonArray.length(); i++) {
-            movies.add(getMovie(moviesJsonArray.getJSONObject(i)));
-        }
-
-        return movies;
-    }
-
-    private Movie getMovie(JSONObject movieJson) throws JSONException {
-        Movie movie = new Movie(movieJson.getInt("id"), movieJson.getString("title"));
-        movie.setOverview(movieJson.getString("overview"));
-        movie.setPoster(movieJson.getString("poster_path"));
-        return movie;
     }
 }
