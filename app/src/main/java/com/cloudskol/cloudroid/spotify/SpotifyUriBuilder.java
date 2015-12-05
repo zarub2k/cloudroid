@@ -41,6 +41,18 @@ public class SpotifyUriBuilder {
         return moviePosterUri;
     }
 
+    public Uri getMoviePoster780Uri(String imageUri) {
+
+        Uri moviePosterUri = Uri.parse(propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_MOVIE_POSTER))
+                .buildUpon()
+                .appendPath(propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_MOVIE_POSTER_W780))
+                .appendPath(removeSlash(imageUri))
+                .build();
+
+        Log.v(LOG_TAG, "Movie poster Uri: " + moviePosterUri.toString());
+        return moviePosterUri;
+    }
+
     public Uri getMovieDetails(int movieId) {
         Uri movieDetailsUri = Uri.parse(propertyReader_.getValue(CloudroidPropertyKeys.SPOTIFY_MOVIE_DETAILS))
                 .buildUpon()

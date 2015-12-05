@@ -7,6 +7,8 @@ package com.cloudskol.cloudroid.spotify;
  */
 public class Movie {
     private int id;
+
+    private String backdrop;
     private String originalTitle;
     private String overview;
     private String poster;
@@ -35,6 +37,14 @@ public class Movie {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
     }
 
     public String getOriginalTitle() {

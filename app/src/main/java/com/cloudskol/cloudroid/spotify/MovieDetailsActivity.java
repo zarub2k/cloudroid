@@ -7,10 +7,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cloudskol.cloudroid.R;
 import com.cloudskol.cloudroid.common.CloudroidPropertyReader;
+import com.squareup.picasso.Picasso;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -48,7 +50,17 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     public void onMovieDataReceived(Movie movie) {
-        TextView textView = (TextView) findViewById(R.id.movie_details_textview);
+        final CloudroidPropertyReader cloudroidPropertyReader = CloudroidPropertyReader
+                .getInstance(getBaseContext());
+        final SpotifyUriBuilder spotifyUriBuilder = new SpotifyUriBuilder(cloudroidPropertyReader);
+
+        final ImageView posterImage = (ImageView) findViewById(R.id.movie_details_poster);
+        Picasso.with(this).load(spotifyUriBuilder.getMoviePoster780Uri(movie.getBackdrop())).into(posterImage);
+
+        TextView title = (TextView) findViewById(R.id.movie_details_title);
+        title.setText(movie.getTitle());
+
+        TextView textView = (TextView) findViewById(R.id.movie_details_overview);
         textView.setText(movie.getOverview());
     }
 }

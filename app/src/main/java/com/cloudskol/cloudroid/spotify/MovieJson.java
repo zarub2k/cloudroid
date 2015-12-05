@@ -4,6 +4,7 @@ package com.cloudskol.cloudroid.spotify;
  * @author tham
  */
 public enum MovieJson {
+    BACKDROP("backdrop_path"),
     ID("id"),
     ORIGINAL_TITLE("original_title"),
     OVERVIEW("overview"),
