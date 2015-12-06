@@ -48,6 +48,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cloudskol.cloudroid.spotify.SpotifyActivity" />
         </activity>
+        <activity
+            android:name=".spotify.MovieSettingsActivity"
+            android:label="@string/title_activity_movie_settings"
+            android:parentActivityName=".spotify.SpotifyActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cloudskol.cloudroid.spotify.SpotifyActivity" />
+        </activity>
     </application>
 
 </manifest>
