@@ -10,4 +10,6 @@
     <dimen name="main_btn_font_size">15sp</dimen>
 
     <dimen name="title_font_size_25">25sp</dimen>
+    <dimen name="title_font_size_15">15sp</dimen>
+    <dimen name="details_title_top_margin">10dp</dimen>
 </resources>

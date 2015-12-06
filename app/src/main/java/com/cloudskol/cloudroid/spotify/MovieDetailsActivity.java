@@ -66,5 +66,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         RatingBar ratingBar = (RatingBar) findViewById(R.id.movie_details_rating);
         ratingBar.setRating(movie.getRating());
+
+        TextView releaseDateView = (TextView) findViewById(R.id.movie_details_release_date);
+        releaseDateView.setText(movie.getReleaseDate());
     }
 }

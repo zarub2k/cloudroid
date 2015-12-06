@@ -69,6 +69,7 @@ public class MovieJsonParser {
         movie.setBackdrop(movieJson.getString(MovieJson.BACKDROP.getValue()));
         Double ratingDouble = (Double)movieJson.get(MovieJson.RATING.getValue());
         movie.setRating(ratingDouble.floatValue()/2); //Rating will be considered based on 5 stars
+        movie.setReleaseDate(movieJson.getString(MovieJson.RELEASE_DATE.getValue()));
         return movie;
     }
 }
