@@ -68,7 +68,7 @@ public class MovieJsonParser {
         movie.setPoster(movieJson.getString(MovieJson.POSTER.getValue()));
         movie.setBackdrop(movieJson.getString(MovieJson.BACKDROP.getValue()));
         Double ratingDouble = (Double)movieJson.get(MovieJson.RATING.getValue());
-        movie.setRating(ratingDouble.floatValue());
+        movie.setRating(ratingDouble.floatValue()/2); //Rating will be considered based on 5 stars
         return movie;
     }
 }
