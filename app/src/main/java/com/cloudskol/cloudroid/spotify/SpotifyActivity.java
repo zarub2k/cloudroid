@@ -31,7 +31,6 @@ public class SpotifyActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = SpotifyActivity.class.getSimpleName();
 
-//    ArrayAdapter<Movie> arrayAdapter;
     private MoviesGridAdapter moviesGridAdapter;
 
     @Override

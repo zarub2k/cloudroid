@@ -2,6 +2,8 @@ package com.cloudskol.cloudroid.spotify;
 
 /**
  * @author tham
+ *
+ * Enum for providing the sort by functionality for our application
  */
 public enum SortBy {
     MOST_POPULAR(0),

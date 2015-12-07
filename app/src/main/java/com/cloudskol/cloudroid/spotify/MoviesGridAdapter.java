@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * @author tham
+ *
+ * Adapter class for rendering list of movies
  */
 public class MoviesGridAdapter extends BaseAdapter {
     private Context context_;

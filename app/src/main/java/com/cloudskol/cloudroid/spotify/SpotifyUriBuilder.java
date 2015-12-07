@@ -8,6 +8,8 @@ import com.cloudskol.cloudroid.common.CloudroidPropertyReader;
 
 /**
  * @author tham
+ *
+ * Utility class for building Uri for list of movies and movie details
  */
 public class SpotifyUriBuilder {
 
