@@ -35,7 +35,7 @@ public class DiscoverMoviesAsyncTask extends AsyncTask<Uri, Void, List<Movie>> {
         try {
             moviesJsonString = spotifyUrlConnector.getJson(discoverMoviesUri.toString());
         } catch (CloudroidException e) {
-            Log.e(LOG_TAG, "Error while fetching JSON", e);
+            Log.e(LOG_TAG, "Error while fetching JSON: " + e.getMessage(), e);
             return null;
         }
 
