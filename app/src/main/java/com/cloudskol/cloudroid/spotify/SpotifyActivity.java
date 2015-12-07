@@ -122,10 +122,15 @@ public class SpotifyActivity extends AppCompatActivity {
         discoverMoviesAsyncTask.execute(spotifyUriBuilder.discoverMoviesUri(getSortByPreferenceValue()));
     }
 
+    /**
+     * Reads the share preference configuration for sort by value
+     *
+     * @return SortBy enum value
+     */
     private SortBy getSortByPreferenceValue() {
         final String sortByValue = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.pref_sort_by_key),
                 getString(R.string.pref_sort_by_default_value));
-        Toast.makeText(this, "Sort by value: " + sortByValue, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Sort by value: " + sortByValue, Toast.LENGTH_SHORT).show();
         return SortBy.get(Integer.valueOf(sortByValue));
     }
 }
