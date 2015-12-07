@@ -2,6 +2,7 @@ package com.cloudskol.cloudroid.spotify;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +55,12 @@ public class SpotifyActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        loadMoviesData();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_spotify, menu);
@@ -68,13 +75,22 @@ public class SpotifyActivity extends AppCompatActivity {
             return true;
         }
 
+        if (itemId == R.id.action_settings) {
+            showSettings();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
+    private void showSettings() {
+        final Intent movieSettingsIntent = new Intent(this, MovieSettingsActivity.class);
+        startActivity(movieSettingsIntent);
+    }
+
     private void renderMovies() {
-//        initializeGridView();
         initCustomGridView();
-        loadMoviesData();
+//        loadMoviesData();
     }
 
     private void initCustomGridView() {
@@ -98,30 +114,19 @@ public class SpotifyActivity extends AppCompatActivity {
         });
     }
 
-//    private void initializeGridView() {
-//        final GridView spotifyGridView = (GridView) findViewById(R.id.gridView_spotify);
-//        arrayAdapter = new ArrayAdapter<Movie>(this,
-//                R.layout.list_item_spotify, R.id.list_item_spotify_textview, new ArrayList<Movie>(2));
-//        spotifyGridView.setAdapter(arrayAdapter);
-//
-//        spotifyGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                final Intent movieDetailsIntent = new Intent(getBaseContext(),
-//                        MovieDetailsActivity.class)
-//                        .putExtra(Intent.EXTRA_TEXT, arrayAdapter.getItem(position).getTitle());
-//                startActivity(movieDetailsIntent);
-////                Toast.makeText(getBaseContext(), "Grid item: " + arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
     private void loadMoviesData() {
         final CloudroidPropertyReader cloudroidPropertyReader = CloudroidPropertyReader
                 .getInstance(getBaseContext());
         final SpotifyUriBuilder spotifyUriBuilder = new SpotifyUriBuilder(cloudroidPropertyReader);
 
         final DiscoverMoviesAsyncTask discoverMoviesAsyncTask = new DiscoverMoviesAsyncTask(moviesGridAdapter);
-        discoverMoviesAsyncTask.execute(spotifyUriBuilder.discoverMoviesUri());
+        discoverMoviesAsyncTask.execute(spotifyUriBuilder.discoverMoviesUri(getSortByPreferenceValue()));
+    }
+
+    private SortBy getSortByPreferenceValue() {
+        final String sortByValue = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.pref_sort_by_key),
+                getString(R.string.pref_sort_by_default_value));
+        Toast.makeText(this, "Sort by value: " + sortByValue, Toast.LENGTH_SHORT).show();
+        return SortBy.get(Integer.valueOf(sortByValue));
     }
 }

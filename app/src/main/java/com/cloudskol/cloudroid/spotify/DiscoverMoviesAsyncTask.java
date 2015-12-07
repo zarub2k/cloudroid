@@ -50,7 +50,7 @@ public class DiscoverMoviesAsyncTask extends AsyncTask<Uri, Void, List<Movie>> {
             return;
         }
 
+        moviesGridAdapter_.clear();
         moviesGridAdapter_.addAll(movies);
-        moviesGridAdapter_.notifyDataSetChanged();
     }
 }

@@ -66,5 +66,11 @@ public class MoviesGridAdapter extends BaseAdapter {
 
     public void addAll(List<Movie> movies) {
         movies_.addAll(movies);
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        movies_.clear();
+        notifyDataSetChanged();
     }
 }
